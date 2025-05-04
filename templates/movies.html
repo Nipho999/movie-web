@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Movies</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+            background-color: black;
+        }
+        .movies-container {
+            padding: 6px;
+            text-align: center; /* Center the movie boxes */
+        }
+        .movie-row::after {
+            content: "";
+            display: table;
+            clear: both; /* Clear the float after each row */
+        }
+        .movie-box {
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            padding: -4px;
+            float: left;
+            width: 88px;
+            height: 200px; /* Increased height to accommodate button */
+            margin: 7px;
+            display: inline-block; /* Display movie boxes inline */
+            box-sizing: border-box; /* Ensure padding is included in the width */
+            position: relative; /* Positioning for absolute elements */
+        }
+        .movie-image {
+            width: 100%;
+            height: 76%;
+            margin-top: -11px;
+            border-top-left-radius: 5px;
+            border-top-right-radius: 5px;
+        }
+        .movie-title {                                                                                                            font-weight: bold;
+            font-size:12px;
+            color: black;
+            margin-top: -8px;
+            background-color:darkcyan;
+            border-top-left-radius: 5px;
+            border-top-right-radius: 5px;
+            text-align: center;
+            float:center;
+        }
+
+        .movie-link {
+            font-weight: bold;
+            font-size:15px;
+            width:100%;
+            color: #333;
+            height:30px; /* Increased height for button */
+            text-decoration:none;
+            position: absolute; /* Position the link at the bottom */
+            bottom: 0;
+            left: 0;
+            text-align: center;
+        }
+
+        .movie-link button {
+            height: 100%;
+            width: 100%;
+            border-top-left-radius: 5px;
+            border-top-right-radius: 5px;
+            background: cyan;
+            border-bottom-left-radius: 5px;
+            border-bottom-right-radius: 5px;
+            border: none;
+            cursor: pointer;
+        }
+
+    </style>
+</head>
+<body>
+    <h1 style="text-align: center; text-align:right; margin-top: 1px; color-black; background-color:darkcyan; border-radius:5px;">U-<em style="color:darkred; font-size:24px;">Stream &#128250; &nbsp</em></h1>
+    <hr style="margin-top: -13px; color:red; width:98%;">
+    <div class="movies-container">
+        {% for movie in movies %}
+            <div class="movie-box">
+              
+                <h2 class="movie-title">{{ movie.title |safe }}</h2>
+                <img class="movie-image" src="{{ movie.image_url }}" alt="{{ movie.title }}">
+                
+                <div class="movie-link">
+                    <a href="/movie/{{ movie.id }}"><button>Preview</button></a>
+                </div>
+                 <hr style="margin-top: -13px; color:red; width:98%;"> <br>
+            </div>
+            {% if loop.index % 4 == 0 %}
+                <div class="movie-row"></div> <!-- Close the row after every 4th movie -->
+            {% endif %}
+        {% endfor %}
+    </div>
+</body>
+</html>
